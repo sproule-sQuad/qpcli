@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	commands "github.com/sproule-sQuad/cli/lib"
+	commands "github.com/sproule-sQuad/qpcli/lib"
 	"github.com/urfave/cli/v2"
 )
 
@@ -15,35 +15,35 @@ func main() {
 		Commands: []*cli.Command{
 			{
 				Name:    "btc",
-				Aliases: []string{"a"},
-				Usage:   "add a task to the list",
+				Aliases: []string{"bp"},
+				Usage:   "checks bitcoin price",
 				Action:  func(c *cli.Context) error {
-					commands.Fetch_btc_data()
+					commands.FetchBtcData()
 					return nil
 				},
 			},
 			{
-				Name:    "complete",
-				Aliases: []string{"c"},
-				Usage:   "complete a task on the list",
+				Name:    "install-dev",
+				Usage:   "setup initial dev",
 				Action:  func(c *cli.Context) error {
-					fmt.Println("completed task: ", c.Args().First())
+					commands.InstallDev()
 					return nil
 				},
 			},
-//			{
-//				Name:        "template",
-//				Aliases:     []string{"t"},
-//				Usage:       "options for task templates",
-//				Subcommands: []*cli.Command{
-//					{
-//						Name:  "add",
-//						Usage: "add a new template",
-//						Action: func(c *cli.Context) error {
-//							fmt.Println("new task template: ", c.Args().First())
-//							return nil
-//						},
-//					},
+			{
+				Name:        "azure",
+				Aliases:     []string{"az"},
+				Usage:       "useful azure commands bundled",
+				Subcommands: []*cli.Command{
+					{
+						Name:  "kubectxs",
+						Usage: "fetch all kubernetes contexts",
+						Aliases: []string{"kctxs"},
+						Action: func(c *cli.Context) error {
+							fmt.Println("fetch all kuebernetes")
+							return nil
+						},
+					},
 //					{
 //						Name:  "remove",
 //						Usage: "remove an existing template",
@@ -52,8 +52,8 @@ func main() {
 //							return nil
 //						},
 //					},
-//				},
-//			},
+				},
+			},
 		},
 	}
 
